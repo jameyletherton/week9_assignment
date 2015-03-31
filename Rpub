@@ -1,0 +1,74 @@
+---
+title: "week9_assignment"
+author: "Jamey Etherton"
+date: "Sunday, March 29, 2015"
+output: html_document
+---
+
+
+
+```{r}
+library(XML2R)
+library(htmltools)
+library(htmlTable)
+library(RJSONIO) 
+library(jsonlite)
+
+```
+
+html <- readLines("http://www.gutenberg.org/files/17185/17185-h/17185-h.htm")
+
+head(html, n=200)
+```{r}
+# html file
+
+url1 <- "https://github.com/jameyletherton/week9_assignment/blob/f12a908cd9ca8abd7dda725192c776f46f4d4c5c/book.html"
+
+tables1 <- readHTMLTable(url1,header = T)
+
+head(tables1)
+str(tables1)
+
+url <- "file:///C:/Users/jamey/Documents/IS%20607/book.html"
+tables <- readHTMLTable(url,header = T)
+
+head(tables)
+str(tables)
+
+
+
+
+#xml file
+
+#doc1 <- xmlTreeParse("https://github.com/jameyletherton/week9_assignment/blob/master/book.xml") ; failed
+
+#class(doc1)
+
+doc <- xmlTreeParse("C://Users/jamey/Documents/IS 607/book.xml")
+
+
+class(doc)
+root <- xmlRoot(doc)
+
+child <- xmlChildren(root)
+
+root
+child
+
+
+sapply(child, xmlValue)
+
+
+```
+
+
+```{r}
+ book2 <- "C://Users/jamey/Documents/IS 607/book.json"
+
+bookjason <- readLines(book2)
+str(bookjason)
+
+readbook2 <- fromJSON(bookjason)
+readbook2
+```
+
